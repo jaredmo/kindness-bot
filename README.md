@@ -7,7 +7,7 @@ There are also modules to auto-reply to new followers, tweet on a schedule, and 
 
 Requires a module called credentials.py with the following info from Twitter.
 
-consumer_key = [consumer_key]
-consumer_secret = [consumer_secret] 
-access_token = [access_token]
-access_token_secret = [access_token_secret]
+consumer_key = [consumer_key]  
+consumer_secret = [consumer_secret]   
+access_token = [access_token]  
+access_token_secret = [access_token_secret]  
