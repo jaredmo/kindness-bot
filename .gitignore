@@ -4,3 +4,4 @@
 credentials.py
 *.txt
 *.pyc
+*.bat
