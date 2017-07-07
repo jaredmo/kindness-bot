@@ -45,13 +45,15 @@ for tweet in tweepy.Cursor(api.search,
                      q=txt,
                      since_id=maxtweet,
                      geocode=gc).items(50):
-    print("Sending kindness reminder to", tweet.user.screen_name, "@ tweet ID:", tweet.id)
-    if tweet.id > maxtweet: maxtweet = tweet.id
-    sn = tweet.user.screen_name
-    m = "@%s Friendly reminder to always be nice online!" % (sn)
-    api.update_status(m, tweet.id)
-    print("Napping for 2 minutes so Twitter doesn't get ANGRY. Zzzzzz...")
-    sleep(120)
+    if tweet.text[:2] != "RT":
+        print("Sending kindness reminder to", tweet.user.screen_name, "@ tweet ID:", tweet.id)
+        sn = tweet.user.screen_name
+        m = "@%s Friendly reminder to always be nice online!" % (sn)
+        api.update_status(m, tweet.id)
+        print("Napping for 2 minutes so Twitter doesn't get ANGRY. Zzzzzz...")
+        if tweet.id > maxtweet:
+            maxtweet = tweet.id
+        sleep(120)
 
 #Write out the last tweet ID for next run
 print("Last tweet searched is", maxtweet, "...Writing to file...")
