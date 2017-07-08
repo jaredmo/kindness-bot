@@ -26,7 +26,7 @@ def tweet():
         if line != '\n':
             api.update_status(line)
             print("Napping for 15 minutes. Zzzzzz...")
-            sleep(1)
+            sleep(900)
         else:
             pass
 tweet()
