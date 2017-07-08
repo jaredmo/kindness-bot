@@ -31,13 +31,17 @@ def tweet():
             pass
 tweet()
 
+# Create text file for tweet archive if it doesn't exist
+if not os.path.exists("kind-tweets-archive.txt"):
+    f = open("kind-tweets-archive.txt", '+w')
+    f.close()
 
 # Archive tweets and clear file
 f = open(path + "\kind-tweets.txt", "r")
 archive = f.readlines()
 f.close()
 if archive:
-    f = open(path + "\kind-tweets-archive.txt", "a")
+    f = open("kind-tweets-archive.txt", "a")
     f.write(str(datetime.datetime.now()) + "\n")
     f.writelines(archive)
     f.write("\n")
