@@ -2,6 +2,9 @@
 import tweepy
 from time import sleep
 from credentials import *
+from shutil import copyfile
+import os
+import datetime
 
 
 # Access and authorize our Twitter credentials from credentials.py
@@ -11,23 +14,33 @@ api = tweepy.API(auth)
 
 
 # Open text file and import each line
-f = open('kind-tweets.txt', 'r')
+f = open(path + "\kind-tweets.txt", "r")
 file_lines = f.readlines()
 f.close()
 
 
-# Tweet a line every 30 minutes
+# Tweet a line every 15 minutes
 def tweet():
     for line in file_lines:
-        try:
-             print(line)
-             if line != '\n':
-                 api.update_status(line)
-                 sleep(900)
-             else:
-                pass
-        except tweepy.TweepError as e:
-            print(e.reason)
-            sleep(2)
-
+        print("Sending this kind tweet:", line)
+        if line != '\n':
+            api.update_status(line)
+            print("Napping for 15 minutes. Zzzzzz...")
+            sleep(1)
+        else:
+            pass
 tweet()
+
+
+# Archive tweets and clear file
+f = open(path + "\kind-tweets.txt", "r")
+archive = f.readlines()
+f.close()
+if archive:
+    f = open(path + "\kind-tweets-archive.txt", "a")
+    f.write(str(datetime.datetime.now()) + "\n")
+    f.writelines(archive)
+    f.write("\n")
+    f.close()
+    os.remove(path + "\kind-tweets.txt")
+    open(path + "\kind-tweets.txt", '+w')
