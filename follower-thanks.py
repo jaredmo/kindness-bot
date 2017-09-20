@@ -3,7 +3,6 @@ import os
 import tweepy
 from credentials import *
 
-# pycharm test
 
 # Access and authorize our Twitter credentials from credentials.py
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
